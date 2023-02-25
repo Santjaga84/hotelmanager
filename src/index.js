@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import { BrowserRouter, Route, Router } from 'react-router-dom';
 import { Switch } from 'antd';
-import App from './pages/App';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
-import store from './redux';
+import store from './store';
 import { Provider } from 'react-redux';
 import { createBrowserHistory } from 'history';
 
-const history = createBrowserHistory();
+
+//const history = createBrowserHistory();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
