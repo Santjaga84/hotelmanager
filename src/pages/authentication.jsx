@@ -30,27 +30,7 @@ const info = () => {
     messageApi.info('Неверное имя пользователя или пароль');
   };
 
-const accounts = useSelector(getAccountsState);
-  const isAuthorized = useSelector(getIsAuthorized);
-  
 
-  const [form] = Form.useForm();
-  
-
-  const isEmptyAccounts = useMemo(() => {
-    if (!accounts) return true;
-
-    return !Object.keys(accounts).length;
-  }, [accounts]);
-
-  const onFinish = (values) => {
-    dispatch(logIn(values));
-    form.resetFields();
-  };
-
-  useEffect(() => {
-    if (isAuthorized) navigate('/');
-  }, [isAuthorized]);
 
 
 const handleSubmit = async (e) => {
@@ -71,6 +51,11 @@ const handleSubmit = async (e) => {
       }
   }
  
+const onFinish = (values) => {
+console.log('Success:', values);
+    setPassword(values);
+    
+};
 
 const onFinishFailed = (errorInfo) => {
   console.log('Failed:', errorInfo);
@@ -80,7 +65,7 @@ return (
 
 <div className='card-auth'>
       <Form
-     form={form}
+     
     name="basic"
     labelCol={{
       span: 8,

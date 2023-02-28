@@ -4,7 +4,7 @@ import ACTION_TYPES from './../../constants/actionTypes'
 const initialState = {};
 
 //reducer
-export function roomReducer(state = initialState,{type, payload}){
+export default function roomsReducer(state = initialState,{type, payload}){
   switch(type){
     
     case ACTION_TYPES.GET_ROOMS_SUCCESS:

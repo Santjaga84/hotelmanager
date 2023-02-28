@@ -3,7 +3,7 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { LOAD_USER_DATA,LOAD_ROOMS_DATA,requestUserData,requestRoomData } from './constants/actionTypes';
+import { LOAD_USER_DATA,LOAD_ROOMS_DATA,requestRoomData } from './constants/actionTypes';
 import Header from './Header';
 import Home from './Home';
 import Auth from './pages/authentication';
@@ -11,34 +11,31 @@ import MainLayout from './pages/MainLayout'
 import { AuthContextProvider } from './pages/context/AuthContext';
 import ProtectedRoute from './pages/context/ProtectedRoute';
 import RoomsTablePage from './pages/RoomsTablePage';
+import SingleRoomPage from './pages/context/SingleRoomPages/SingleRoomPage';
 import { getAccounts } from './store/actions/usersActions';
 import { getRoomsState } from './selectors/roomsSelectors';
 import { getAccountsState } from './selectors/usersSelectors';
+import { getAccountsSuccess } from './store/actions/usersActions';
 import { getIsAuthorized } from './selectors/usersSelectors';
 import { getAuthUser } from './selectors/usersSelectors';
 import { useMemo } from 'react';
+import { requestUserData } from './store/actions/usersActions';
+
+
 
 function App() {
 
    const dispatch = useDispatch();
-   const rooms = useSelector(getRoomsState) || [];
+  //  const rooms = useSelector(getRoomsState) || [];
 
-   const accounts = useSelector(getAccountsState) || [];
-  const isAuthorized = useSelector(getIsAuthorized);
+  // console.log('roomsData',rooms);
 
-  const isEmptyAccounts = useMemo(() => {
-    if (!accounts) return true;
+  useEffect(() => {
+    dispatch(requestUserData());
+  }, []);
 
-    return !Object.keys(accounts).length;
-  }, [accounts]);
-  console.log(isEmptyAccounts);
+ const userData = useSelector(store => store.users.users);   console.log('useerData',userData);
 
-  console.log('userData',accounts);
-  console.log('userData',isAuthorized);
- 
-
- 
-  console.log('roomsData',rooms);
 
   return (
     <AuthContextProvider>
@@ -47,6 +44,8 @@ function App() {
         <Route path="/" element={<Home/>} />
         <Route path="/" element={<Header/>}>   
         <Route path="/roomstablepages" element={<ProtectedRoute><RoomsTablePage /></ProtectedRoute>} />
+      
+      <Route path="/rooms?:roomId" element={<SingleRoomPage />} />
       </Route> 
      </Routes>
      </AuthContextProvider> 

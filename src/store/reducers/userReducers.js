@@ -1,34 +1,37 @@
-import { USER_LOADER, LOAD_USERS_SUCCESS, LOAD_USERS_FAILURE } from "../../constants/actionTypes";
-import ACTION_TYPES from "./../../constants/actionTypes";
+import { USER_LOADER, LOAD_USERS_SUCCESS, LOAD_USERS_FAILURE } from "./../actions/usersActions";
 
 const initialState = {
-    accounts: {},
-  authUser: {
-    isAuthorized: false,
-    username: '',
-  }, 
+  users: [],
+  status: null,
+  error: null,
 };
 
 //reducer
-export default function usersReducer(state = initialState,{ type, payload }) {
-  switch (type) {
-  case ACTION_TYPES.GET_ACCOUNTS_SUCCESS:
-    return {
-      ...state,
-      accounts: { ...state.accounts, ...payload },
-    };
-  case ACTION_TYPES.LOGIN_SUCCESS:
-    return {
-      ...state,
-      authUser: { ...state.authUser, isAuthorized: true, ...payload },
-    };
-  case ACTION_TYPES.LOGOUT_SUCCESS:
-    return {
-      ...state,
-      authUser: { isAuthorized: false, username: '' },
-    };
-  default:
-    return state;
-  }
-}
+export function userReducer(state = initialState,action){
+  switch(action.type){
+    
+    case USER_LOADER:
+      return {
+        ...state,
+        users: action.payload,
+      }
+    case LOAD_USERS_SUCCESS: {
+            return {
+                ...state,
+                loading: false,
+                data: action.payload,
+            };
+        }
 
+    case LOAD_USERS_FAILURE: {
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            };
+        }
+
+    default:
+            return state;
+    }
+}

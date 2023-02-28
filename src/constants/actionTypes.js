@@ -12,20 +12,5 @@ export default {
   
 };
 
-export const ROOMS_LOADER = 'ROOMS_LOADER';
-export const LOAD_ROOMS_SUCCESS = 'LOAD_USERS_SUCCESS';
-export const LOAD_ROOMS_FAILURE = 'LOAD_USERS_FAILURE';
-export const LOAD_USER_DATA = 'LOAD_USER_DATA';
-export const LOAD_ROOMS_DATA = 'LOAD_ROOMS_DATA';
-export const USER_LOADER = 'USER_LOADER';
-export const LOAD_USERS_SUCCESS = 'LOAD_USERS_SUCCESS';
-export const LOAD_USERS_FAILURE = 'LOAD_USERS_FAILURE'
 
-export const requestUserData = () => {
-  return { type: LOAD_USER_DATA }
-};
-
-export const requestRoomData = () => {
-  return { type: LOAD_ROOMS_DATA }
-};
 
