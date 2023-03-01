@@ -7,12 +7,43 @@ import { CheckOutlined, HomeOutlined } from '@ant-design/icons';
 import { getSingleRoom } from '../../../selectors/roomsSelectors.js'
 import { ROOM_TYPE_LABEL } from '../../../constants/rooms';
 //import './SingleRoomPage.scss';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import {getRooms} from './../../../store/actions/roomsActions'
+
 
 const propTypes = {};
 
 const SingleRoomPage = () => {
-  const { search } = useLocation();
-  const room = useSelector((state) => getSingleRoom(state, search.substr(1)));
+  // const { search } = useLocation();
+  // const room = useSelector((state) => getSingleRoom(state, search.substr(1)));
+
+//const { id } = useParams();
+const dispatch = useDispatch();
+
+const rooms = useSelector(state => state.rooms);
+const [currentRoom, setCurrentRoom] = useState({})
+  
+const {roomId} = useParams(); 
+
+console.log("room",roomId);
+
+useEffect(() => {
+ dispatch(getRooms());
+ 
+  },[]); 
+
+
+useEffect(() => {
+
+rooms.forEach(room => {
+  if(room.id === roomId ) setCurrentRoom(room);
+  console.log("price",room.price);
+});
+},[rooms]);
+console.log("price",currentRoom.price);
 
   return (
     
@@ -28,17 +59,17 @@ const SingleRoomPage = () => {
         </Col>
         <Col span={12}>
           <Carousel>
-            {room.gallery.map((imageUrl) => <img key={imageUrl} src={imageUrl} alt={room.type} className="slider-image" />)}
+            {currentRoom.gallery.map((imageUrl) => <img key={imageUrl} src={imageUrl} alt={currentRoom.type} className="slider-image" />)}
           </Carousel>
         </Col>
         <Col span={12}>
           <Row justify="space-between">
             <Col>
-              <Typography.Title level={2} underline>{`Room ${room.number}`}</Typography.Title>
+              <Typography.Title level={2} underline>{`Room ${currentRoom.number}`}</Typography.Title>
             </Col>
             <Col>
-              <Button type="primary" className="room-button" disabled={room.isCheckedIn}>Check In</Button>
-              <Button type="primary" className="room-button" disabled={!room.isCheckedIn}>Check Out</Button>
+              <Button type="primary" className="room-button" disabled={currentRoom.isCheckedIn}>Check In</Button>
+              <Button type="primary" className="room-button" disabled={!currentRoom.isCheckedIn}>Check Out</Button>
             </Col>
           </Row>
           <Row>
@@ -47,10 +78,10 @@ const SingleRoomPage = () => {
                 labelStyle={{ fontWeight: 'bold', alignSelf: 'center' }}
                 column={1}
               >
-                <Descriptions.Item label="Type">{ROOM_TYPE_LABEL[room.type]}</Descriptions.Item>
-                <Descriptions.Item label="Occupancy">{room.occupancy}</Descriptions.Item>
-                <Descriptions.Item label="Price">{`${room.price}$`}</Descriptions.Item>
-                <Descriptions.Item label="Quest">{room.guest}</Descriptions.Item>
+                <Descriptions.Item label="Type">{ROOM_TYPE_LABEL[currentRoom.type]}</Descriptions.Item>
+                <Descriptions.Item label="Occupancy">{currentRoom.occupancy}</Descriptions.Item>
+                <Descriptions.Item label="Price">{`${currentRoom.price}$`}</Descriptions.Item>
+                <Descriptions.Item label="Quest">{currentRoom.guest}</Descriptions.Item>
               </Descriptions>
             </Col>
             <Col span={12}>
@@ -61,7 +92,7 @@ const SingleRoomPage = () => {
                 <Descriptions.Item label="Features">
                   <List
                     size="small"
-                    dataSource={room.features}
+                    dataSource={currentRoom.features}
                     renderItem={(item) => (
                       <List.Item>
                         <CheckOutlined />
@@ -77,7 +108,7 @@ const SingleRoomPage = () => {
         </Col>
         <Col span={24}>
           <Descriptions labelStyle={{ fontWeight: 'bold' }} column={2}>
-            <Descriptions.Item label="Description">{room.description}</Descriptions.Item>
+            <Descriptions.Item label="Description">{currentRoom.description}</Descriptions.Item>
           </Descriptions>
         </Col>
       </Row>
@@ -85,6 +116,6 @@ const SingleRoomPage = () => {
   );
 };
 
-SingleRoomPage.propTypes = propTypes;
+//SingleRoomPage.propTypes = propTypes;
 
 export default SingleRoomPage;

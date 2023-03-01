@@ -34,7 +34,7 @@ function App() {
     dispatch(requestUserData());
   }, []);
 
- const userData = useSelector(store => store.users.users);   console.log('useerData',userData);
+ const userData = useSelector(store => store.users.accounts);   console.log('useerData',userData);
 
 
   return (
@@ -45,7 +45,7 @@ function App() {
         <Route path="/" element={<Header/>}>   
         <Route path="/roomstablepages" element={<ProtectedRoute><RoomsTablePage /></ProtectedRoute>} />
       
-      <Route path="/rooms?:roomId" element={<SingleRoomPage />} />
+      <Route path="/rooms/:roomId" element={<ProtectedRoute><SingleRoomPage /></ProtectedRoute>} />
       </Route> 
      </Routes>
      </AuthContextProvider> 

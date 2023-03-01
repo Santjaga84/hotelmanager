@@ -30,6 +30,7 @@ const logout = () => {
    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
    console.log(currentUser);
     setUser(currentUser)
+    
    })
    return () => {
     unsubscribe();

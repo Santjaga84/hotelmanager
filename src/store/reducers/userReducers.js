@@ -1,9 +1,11 @@
 import { USER_LOADER, LOAD_USERS_SUCCESS, LOAD_USERS_FAILURE } from "./../actions/usersActions";
 
 const initialState = {
-  users: [],
-  status: null,
-  error: null,
+ accounts: {},
+  authUser: {
+    isAuthorized: false,
+    username: '',
+  },
 };
 
 //reducer
@@ -13,21 +15,23 @@ export function userReducer(state = initialState,action){
     case USER_LOADER:
       return {
         ...state,
-        users: action.payload,
+        accounts: action.payload,
       }
     case LOAD_USERS_SUCCESS: {
             return {
                 ...state,
-                loading: false,
-                data: action.payload,
+                authUser: {  
+  isAuthorized: true,
+                  
+                }
             };
         }
 
     case LOAD_USERS_FAILURE: {
             return {
                 ...state,
-                loading: false,
-                error: action.payload,
+                isAuthorized: false,
+               
             };
         }
 
