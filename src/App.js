@@ -1,17 +1,9 @@
 
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import Header from './Header';
-import Home from './Home';
-import MainLayout from './pages/MainLayout'
-import { AuthContextProvider } from './pages/context/AuthContext';
-import ProtectedRoute from './pages/context/ProtectedRoute';
-
 import { requestUserData } from './store/actions/usersActions';
-
-
+import { getRooms } from './store/actions/roomsActions';
 
 function App() {
 
@@ -23,18 +15,16 @@ function App() {
 
  const userData = useSelector(store => store.users.accounts);   console.log('useerData',userData);
 
+useEffect(() => {
+    dispatch(getRooms());
+  }, []);
+
+  const roomData = useSelector(store => store.rooms);   console.log('useerData',roomData);
 
   return (
-    <AuthContextProvider>
-    <Routes>
-        
-        <Route path="/" element={<Home/>} />
-        <Route path="/" element={<Header/>}>   
-        <Route path="/mainlayout" element={<ProtectedRoute><MainLayout /></ProtectedRoute>} />
-       
-      </Route> 
-     </Routes>
-     </AuthContextProvider> 
+    <div>
+
+    </div>
   );
 }
 
