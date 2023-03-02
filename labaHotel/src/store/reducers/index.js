@@ -1,19 +1,19 @@
 import { combineReducers } from "redux";
-import { userReducer } from "./userReducers";
-import { roomReducer } from "./roomReducers";
+import  {userReducer}  from "./userReducers";
+import   roomsReducer  from "./roomReducers";
 import notificationsReducer from "./notificationsReducer";
 
-const initial = {};
+// const initial = {};
 
-export function appReducer(state = initial,action){
+// export function appReducer(state = initial,action){
 
-  return state;
-}
+//   return state;
+// }
 
 const rootReducer = combineReducers({
-  userRed: userReducer,
-  roomRed: roomReducer,
+  rooms: roomsReducer,
+  users: userReducer,
   notifications: notificationsReducer,
-})
+});
 
 export default rootReducer;

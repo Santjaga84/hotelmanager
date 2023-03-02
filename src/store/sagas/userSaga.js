@@ -15,8 +15,6 @@ function* getAccounts(){
 }
 
 
-
-
 export default function* watchUserData(){
   yield takeEvery(LOAD_USER_DATA, getAccounts);
 }

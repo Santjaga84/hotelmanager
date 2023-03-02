@@ -44,8 +44,7 @@ function App() {
         <Route path="/" element={<Home/>} />
         <Route path="/" element={<Header/>}>   
         <Route path="/roomstablepages" element={<ProtectedRoute><RoomsTablePage /></ProtectedRoute>} />
-      
-      <Route path="/rooms/:roomId" element={<ProtectedRoute><SingleRoomPage /></ProtectedRoute>} />
+        <Route path="/rooms/:roomId" element={<ProtectedRoute><SingleRoomPage /></ProtectedRoute>} />
       </Route> 
      </Routes>
      </AuthContextProvider> 

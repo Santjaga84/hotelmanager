@@ -91,7 +91,7 @@ return (
       rules={[
         {
           required: true,
-          message: 'Please input your username!',
+          message: 'Please input your username!: uaer1@gmail.com',
         },
       ]}
     >
@@ -106,7 +106,7 @@ return (
       rules={[
         {
           required: true,
-          message: 'Please input your password!',
+          message: 'Please input your password!Password: password1',
         },
       ]}
     >

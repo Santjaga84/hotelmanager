@@ -1,4 +1,4 @@
-import Auth from "./pages/auth";
+import Auth from "./pages/authentication";
 
 const Home = () => {
   return(

@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA8gLq7EW5n_8pmScjGFfmFVv4fjlKB_LU",
@@ -15,12 +15,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
-// export const getRoomsFirebase = async () => {
-//   const dbRooms = await getDocs(collection(db, "rooms"));
+export const auth = getAuth(app);
 
-//  let roomsArr = []
-//  dbRooms.forEach((doc) => {
-//     roomsArr.push({...doc.data(), id: doc.id})
-//     });
-//     return roomsArr;
-// };
+export default app;

@@ -12,7 +12,7 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import {getRooms} from './../../../store/actions/roomsActions'
-
+import { getRoomsSuccess } from './../../../store/actions/roomsActions';
 
 const propTypes = {};
 
@@ -31,7 +31,7 @@ const {roomId} = useParams();
 console.log("room",roomId);
 
 useEffect(() => {
- dispatch(getRooms());
+ dispatch(getRoomsSuccess());
  
   },[]); 
 
@@ -40,10 +40,9 @@ useEffect(() => {
 
 rooms.forEach(room => {
   if(room.id === roomId ) setCurrentRoom(room);
-  console.log("price",room.price);
+  console.log("price",currentRoom);
 });
 },[rooms]);
-console.log("price",currentRoom.price);
 
   return (
     
@@ -59,7 +58,9 @@ console.log("price",currentRoom.price);
         </Col>
         <Col span={12}>
           <Carousel>
-            {currentRoom.gallery.map((imageUrl) => <img key={imageUrl} src={imageUrl} alt={currentRoom.type} className="slider-image" />)}
+            {/* {currentRoom.gallery.map((imageUrl) =>  */}
+            <img key={currentRoom.imageUrl} src={currentRoom.imageUrl} alt={currentRoom.type} className="slider-image" />
+            {/* )} */}
           </Carousel>
         </Col>
         <Col span={12}>
@@ -116,6 +117,6 @@ console.log("price",currentRoom.price);
   );
 };
 
-//SingleRoomPage.propTypes = propTypes;
+SingleRoomPage.propTypes = propTypes;
 
 export default SingleRoomPage;
