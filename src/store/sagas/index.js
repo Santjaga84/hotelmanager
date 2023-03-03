@@ -1,4 +1,4 @@
-import { takeEvery,all,spawn, call } from 'redux-saga/effects';
+import { all, call } from 'redux-saga/effects';
 import watchRoomsData from './roomSaga';
 import watchUserData from './userSaga';
 

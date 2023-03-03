@@ -1,18 +1,15 @@
 import { Button, Checkbox, Form, Input, message } from 'antd';
-import React, { useState, useEffect,useMemo } from 'react';
+import React, { useState } from 'react';
 import './auth.css';
 import { UserAuth } from './context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch,useSelector } from 'react-redux';
-import { logIn } from '../store/actions/usersActions';
-import { getIsAuthorized } from '../selectors/usersSelectors';
-import { getAccountsState } from '../selectors/usersSelectors';
+import { useDispatch } from 'react-redux';
+
 
 
 
 const Auth = () => {
 
-const dispatch = useDispatch();
 const [password, setPassword] = useState('');
 
 const [email, setEmail] = useState('');
@@ -91,7 +88,7 @@ return (
       rules={[
         {
           required: true,
-          message: 'Please input your username!: uaer1@gmail.com',
+          message: 'Please input your username!: user1@gmail.com',
         },
       ]}
     >

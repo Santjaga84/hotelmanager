@@ -1,11 +1,7 @@
 import {put, takeEvery} from 'redux-saga/effects';
 import {db} from '../../firebase/firebase';
 import { collection, getDocs  } from "firebase/firestore";
- 
-import { ROOMS_LOADER } from './../../constants/actionTypes';
-import { LOAD_ROOMS_DATA } from './../../constants/actionTypes';
-
- import { showNotification } from '../actions/notificationsActions';
+import { showNotification } from '../actions/notificationsActions';
 import { NOTIFICATION_MESSAGE, NOTIFICATION_STATUS } from './../../constants/notifications';
 import {getRoomsSuccess} from './../actions/roomsActions';
 import ACTION_TYPES from './../../constants/actionTypes';

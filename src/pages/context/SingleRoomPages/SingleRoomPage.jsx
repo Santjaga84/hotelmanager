@@ -1,55 +1,57 @@
 import React from 'react';
-import { Button, Carousel, Col, Descriptions, List, Row, Typography } from 'antd';
-import { Link, useLocation } from 'react-router-dom';
+import { List, Button, Carousel, Col, Descriptions, Row, Typography } from 'antd';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { CheckOutlined, HomeOutlined } from '@ant-design/icons';
-//import MainLayout from '../../components/MainLayout';
-import { getSingleRoom } from '../../../selectors/roomsSelectors.js'
+import {  CheckOutlined, HomeOutlined } from '@ant-design/icons';
 import { ROOM_TYPE_LABEL } from '../../../constants/rooms';
-//import './SingleRoomPage.scss';
+import './SingleRoomPage.scss';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import {getRooms} from './../../../store/actions/roomsActions'
-import { getRoomsSuccess } from './../../../store/actions/roomsActions';
 
-const propTypes = {};
+
+//CheckOutlined
 
 const SingleRoomPage = () => {
-  // const { search } = useLocation();
-  // const room = useSelector((state) => getSingleRoom(state, search.substr(1)));
-
-//const { id } = useParams();
+ 
 const dispatch = useDispatch();
 
 const rooms = useSelector(state => state.rooms);
-const [currentRoom, setCurrentRoom] = useState({})
+const [currentRoom, setCurrentRoom] = useState({gallery:[]})
   
 const {roomId} = useParams(); 
 
 console.log("room",roomId);
 
 useEffect(() => {
- dispatch(getRoomsSuccess());
- 
-  },[]); 
+ dispatch(getRooms());
+ },[]); 
 
 
 useEffect(() => {
 
 rooms.forEach(room => {
   if(room.id === roomId ) setCurrentRoom(room);
-  console.log("price",currentRoom);
 });
 },[rooms]);
 
-  return (
+console.log("price",currentRoom.features);
+
+const arr = [];
+for (let key in currentRoom.features) {
+  arr.push(currentRoom.features[key]);
+}
+
+console.log("price2",arr);
+
+return (
     
       <Row gutter={[24, 24]}>
         <Col span={24}>
           <Button type="link">
-            <Link to="/">
+            <Link to="/roomstablepages">
               <HomeOutlined />
               &nbsp;
               Back Home
@@ -58,9 +60,7 @@ rooms.forEach(room => {
         </Col>
         <Col span={12}>
           <Carousel>
-            {/* {currentRoom.gallery.map((imageUrl) =>  */}
-            <img key={currentRoom.imageUrl} src={currentRoom.imageUrl} alt={currentRoom.type} className="slider-image" />
-            {/* )} */}
+           {currentRoom.gallery ? Object.keys(currentRoom.gallery).map((key)=><img key={currentRoom.gallery[key]} src={currentRoom.gallery[key]} alt={currentRoom.type} className="slider-image" /> ):''}
           </Carousel>
         </Col>
         <Col span={12}>
@@ -91,9 +91,10 @@ rooms.forEach(room => {
                 labelStyle={{ fontWeight: 'bold' }}
               >
                 <Descriptions.Item label="Features">
+                
                   <List
                     size="small"
-                    dataSource={currentRoom.features}
+                    dataSource={arr}
                     renderItem={(item) => (
                       <List.Item>
                         <CheckOutlined />
@@ -117,6 +118,6 @@ rooms.forEach(room => {
   );
 };
 
-SingleRoomPage.propTypes = propTypes;
+//SingleRoomPage.propTypes = propTypes;
 
 export default SingleRoomPage;

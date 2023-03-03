@@ -4,16 +4,14 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRoomsState } from '../selectors/roomsSelectors';
 import { ROOMS_TYPES, ROOM_TYPE_LABEL, ROOM_OCCUPANCY_LIST } from '../constants/rooms';
-import { requestRoomData } from '../constants/actionTypes';
 import './roomstable.css';
 import { getRooms } from '../store/actions/roomsActions';
-import { useNavigate } from 'react-router-dom';
+
 
 const RoomsTablePage = () => {
    const rooms = useSelector(getRoomsState) || [];
    const dispatch = useDispatch();
 
-   const navigate = useNavigate();
    const [isChecked, setIsChecked] = useState(false);
    const [filteredInfo, setFilteredInfo] = useState({});
    const [sortedInfo, setSortedInfo] = useState({});
