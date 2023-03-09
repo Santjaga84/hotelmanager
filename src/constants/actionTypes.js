@@ -9,7 +9,9 @@ export default {
   LOGIN_SUCCESS: 'login_success',
   LOGOUT: 'logout',
   LOGOUT_SUCCESS: 'logout_success',
-  
+   CHECK_IN: 'check_in',
+  CHECK_OUT: 'check_out',
+  UPDATE_ROOM_SUCCESS: 'update_room_success',
 };
 
 

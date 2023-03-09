@@ -1,6 +1,6 @@
 import { Button, Checkbox, Form, Input, message } from 'antd';
 import React, { useState } from 'react';
-import './auth.css';
+import './authentication.css';
 import { UserAuth } from './context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -24,7 +24,7 @@ const [messageApi, contextHolder] = message.useMessage();
   
 
 const info = () => {
-    messageApi.info('Неверное имя пользователя или пароль');
+    messageApi.info('Неверное имя пользователя или пароль!!!');
   };
 
 
@@ -84,15 +84,16 @@ return (
     <Form.Item
       label="Username"
       name="username"
+      placeholder="user1@gmail.com"
       onChange={(e) => setEmail(e.target.value)}
       rules={[
         {
           required: true,
-          message: 'Please input your username!: user1@gmail.com',
+          message: 'Please input your username!',
         },
       ]}
     >
-      <Input />
+      <Input  placeholder="user1@gmail.com,user2@gmail.com"/>
     </Form.Item>
 
     <Form.Item
@@ -103,11 +104,11 @@ return (
       rules={[
         {
           required: true,
-          message: 'Please input your password!Password: password1',
+          message: 'Please input your password!',
         },
       ]}
     >
-      <Input.Password />
+      <Input.Password placeholder="password1, password2"/>
     </Form.Item>
 
     <Form.Item

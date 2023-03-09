@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import  usersReducer  from "./userReducers";
+import  {usersReducer}  from "./userReducers";
 import   roomsReducer  from "./roomReducers";
 import notificationsReducer from "./notificationsReducer";
 

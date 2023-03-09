@@ -29,7 +29,7 @@ function App() {
     dispatch(getAccounts());
   },[]);
 
- const userData = useSelector(store => store.accounts);   console.log('useerData',userData);
+ const userData = useSelector(store => store.users.accounts);   console.log('useerData',userData);
 
   return (
     <AuthContextProvider>

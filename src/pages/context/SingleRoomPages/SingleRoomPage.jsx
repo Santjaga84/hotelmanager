@@ -10,7 +10,8 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import {getRooms} from './../../../store/actions/roomsActions'
-
+import CheckInButton from './../../../Buttons/CheckInButton';
+import CheckOutButton from './../../../Buttons/CheckOutButton';
 
 //CheckOutlined
 
@@ -19,7 +20,7 @@ const SingleRoomPage = () => {
 const dispatch = useDispatch();
 
 const rooms = useSelector(state => state.rooms);
-const [currentRoom, setCurrentRoom] = useState({gallery:[]})
+const [currentRoom, setCurrentRoom] = useState({})
   
 const {roomId} = useParams(); 
 
@@ -38,7 +39,8 @@ rooms.forEach(room => {
 },[rooms]);
 
 console.log("price",currentRoom.features);
-
+console.log("currentRoom: ",typeof(currentRoom));
+console.log("rooms",rooms);
 const arr = [];
 for (let key in currentRoom.features) {
   arr.push(currentRoom.features[key]);
@@ -69,8 +71,10 @@ return (
               <Typography.Title level={2} underline>{`Room ${currentRoom.number}`}</Typography.Title>
             </Col>
             <Col>
-              <Button type="primary" className="room-button" disabled={currentRoom.isCheckedIn}>Check In</Button>
-              <Button type="primary" className="room-button" disabled={!currentRoom.isCheckedIn}>Check Out</Button>
+              {/* <Button type="primary" className="room-button" disabled={currentRoom.isCheckedIn}>Check In</Button> */}
+                  <CheckInButton room={currentRoom || {}} /> 
+                 <CheckOutButton room={currentRoom} />   
+              {/* <Button type="primary" className="room-button" disabled={!currentRoom.isCheckedIn}>Check Out</Button> */}
             </Col>
           </Row>
           <Row>
@@ -82,7 +86,7 @@ return (
                 <Descriptions.Item label="Type">{ROOM_TYPE_LABEL[currentRoom.type]}</Descriptions.Item>
                 <Descriptions.Item label="Occupancy">{currentRoom.occupancy}</Descriptions.Item>
                 <Descriptions.Item label="Price">{`${currentRoom.price}$`}</Descriptions.Item>
-                <Descriptions.Item label="Quest">{currentRoom.guest}</Descriptions.Item>
+                <Descriptions.Item label="Guest">{currentRoom.guest}</Descriptions.Item>
               </Descriptions>
             </Col>
             <Col span={12}>

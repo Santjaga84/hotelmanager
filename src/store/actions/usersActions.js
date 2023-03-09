@@ -8,6 +8,8 @@ export const logOut = () => ({ type: ACTION_TYPES.LOGOUT });
 export const logOutSuccess = () => ({ type: ACTION_TYPES.LOGOUT_SUCCESS });
 
 
+
+
 export const USER_LOADER = 'USER_LOADER';
 export const LOAD_USERS_SUCCESS = 'LOAD_USERS_SUCCESS';
 export const LOAD_USERS_FAILURE = 'LOAD_USERS_FAILURE'

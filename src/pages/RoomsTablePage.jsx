@@ -12,6 +12,13 @@ const RoomsTablePage = () => {
    const rooms = useSelector(getRoomsState) || [];
    const dispatch = useDispatch();
 
+    useEffect(() => {
+     if (!rooms.length) {
+       dispatch(getRooms());
+     }
+   }, []);
+
+   
    const [isChecked, setIsChecked] = useState(false);
    const [filteredInfo, setFilteredInfo] = useState({});
    const [sortedInfo, setSortedInfo] = useState({});
@@ -90,11 +97,7 @@ const RoomsTablePage = () => {
      setIsChecked(false);
    };
 
-   useEffect(() => {
-     if (!rooms.length) {
-       dispatch(getRooms());
-     }
-   }, [rooms]);
+  
 
   return (
     
