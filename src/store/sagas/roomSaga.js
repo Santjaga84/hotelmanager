@@ -1,5 +1,5 @@
 import {put, takeEvery, call} from 'redux-saga/effects';
-import {db} from '../../firebase/firebase';
+import {db, updateRoomFirestore} from '../../firebase/firebase';
 import { collection, getDocs, doc, updateDoc  } from "firebase/firestore";
 import { showNotification } from '../actions/notificationsActions';
 import { NOTIFICATION_MESSAGE, NOTIFICATION_STATUS } from './../../constants/notifications';
@@ -44,8 +44,7 @@ yield put(showNotification(NOTIFICATION_STATUS.ERROR, NOTIFICATION_MESSAGE.GET_R
 
 function* updateRoom(id, updatedFields) {
   try {
-    const roomsRef = updateDoc(doc(db, 'rooms', id));
-    yield call([roomsRef, 'update'], updatedFields); // обновляем запись в базе данных
+   yield call(updateRoomFirestore,id, updatedFields); // обновляем запись в базе данных
     yield put(updateRoomSuccess(id, updatedFields));
     yield put(showNotification(NOTIFICATION_STATUS.SUCCESS, NOTIFICATION_MESSAGE.UPDATE_ROOM_SUCCESS));
   } catch (err) {
