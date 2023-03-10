@@ -31,12 +31,17 @@ useEffect(() => {
  },[]); 
 
 
+console.log(rooms);
+
 useEffect(() => {
 
+ if (rooms !== undefined) {  
 rooms.forEach(room => {
   if(room.id === roomId ) setCurrentRoom(room);
 });
+ }
 },[rooms]);
+
 
 console.log("price",currentRoom.features);
 console.log("currentRoom: ",typeof(currentRoom));
@@ -72,7 +77,7 @@ return (
             </Col>
             <Col>
               {/* <Button type="primary" className="room-button" disabled={currentRoom.isCheckedIn}>Check In</Button> */}
-                  <CheckInButton room={currentRoom || {}} /> 
+                  <CheckInButton room={currentRoom} /> 
                  <CheckOutButton room={currentRoom} />   
               {/* <Button type="primary" className="room-button" disabled={!currentRoom.isCheckedIn}>Check Out</Button> */}
             </Col>

@@ -1,5 +1,5 @@
 import {put, takeEvery, call} from 'redux-saga/effects';
-import {db} from '../../firebase/firebase';
+import {db, updateRoomFirestore} from '../../firebase/firebase';
 import { collection, getDocs, doc, updateDoc  } from "firebase/firestore";
 import { showNotification } from '../actions/notificationsActions';
 import { NOTIFICATION_MESSAGE, NOTIFICATION_STATUS } from './../../constants/notifications';
@@ -42,14 +42,24 @@ yield put(showNotification(NOTIFICATION_STATUS.ERROR, NOTIFICATION_MESSAGE.GET_R
 //   }
 // }
 
+// function* updateRoom(roomId, updatedFields) {
+//   try {
+//     const roomsRef = updateDoc(doc(db, 'rooms', roomId));
+//     yield call([roomsRef, 'update'], updatedFields); // обновляем запись в базе данных
+//     yield put(updateRoomSuccess(roomId, updatedFields));
+//     yield put(showNotification(NOTIFICATION_STATUS.SUCCESS, NOTIFICATION_MESSAGE.UPDATE_ROOM_SUCCESS));
+//   } catch (err) {
+//     yield put(showNotification(NOTIFICATION_STATUS.ERROR, NOTIFICATION_MESSAGE.UPDATE_ROOM_ERROR));
+//   }
+// }
+
 function* updateRoom(id, updatedFields) {
-  try {
-    const roomsRef = updateDoc(doc(db, 'rooms', id));
-    yield call([roomsRef, 'update'], updatedFields); // обновляем запись в базе данных
-    yield put(updateRoomSuccess(id, updatedFields));
-    yield put(showNotification(NOTIFICATION_STATUS.SUCCESS, NOTIFICATION_MESSAGE.UPDATE_ROOM_SUCCESS));
-  } catch (err) {
-    yield put(showNotification(NOTIFICATION_STATUS.ERROR, NOTIFICATION_MESSAGE.UPDATE_ROOM_ERROR));
+    try {
+    yield call(updateRoomFirestore, id, updatedFields);
+    yield put(updateRoomSuccess());
+   yield put(showNotification(NOTIFICATION_STATUS.SUCCESS, NOTIFICATION_MESSAGE.UPDATE_ROOM_SUCCESS));
+  } catch (error) {
+   yield put(showNotification(NOTIFICATION_STATUS.ERROR, NOTIFICATION_MESSAGE.UPDATE_ROOM_ERROR));
   }
 }
 
