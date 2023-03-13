@@ -15,16 +15,6 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { UserAuth } from '../../pages/context/AuthContext';
 import { logIn } from '../actions/usersActions';
 
-// function* getAccounts(){
-//   const querySnapshot = yield (getDocs(collection(db, "users")));
-//    let accounts = []
-//  querySnapshot.forEach((doc) => {
-//     accounts.push({...doc.data(), id: doc.id});
-//   });
-//   yield put(getAccountsSuccess(accounts));
-// }
-
-//const {user} = UserAuth();
 
 function* getAccounts(){
   try{
@@ -36,7 +26,7 @@ const accounts = yield new Promise((resolve, reject) => {
         }else{
           isAuthorized = true;
         }
-        console.log("авторизация: ", isAuthorized);
+        
         resolve(isAuthorized);
       }, (error) => {
         reject(error);
@@ -50,6 +40,5 @@ yield put(showNotification(NOTIFICATION_STATUS.ERROR, NOTIFICATION_MESSAGE.GET_R
 
 export default function* watchUserData(){
  yield takeEvery(ACTION_TYPES.GET_ACCOUNTS, getAccounts);
-  // yield takeEvery(ACTION_TYPES.LOGIN, userLogIn);
-  // yield takeEvery(ACTION_TYPES.LOGOUT, userLogOut);
+  
 }

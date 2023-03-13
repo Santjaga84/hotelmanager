@@ -5,42 +5,6 @@ import { useDispatch } from 'react-redux';
 import { checkOutRoom } from './../store/actions/roomsActions';
 import { ROOM_OCCUPANCY_LIST, ROOMS_TYPES } from './../constants/rooms';
 
-// const propTypes = {
-//   room: PropTypes.shape({
-//     id: PropTypes.string.isRequired,
-//     number: PropTypes.number.isRequired,
-//     type: PropTypes.oneOf(Object.values(ROOMS_TYPES)).isRequired,
-//     occupancy: PropTypes.oneOf(ROOM_OCCUPANCY_LIST).isRequired,
-//     isCheckedIn: PropTypes.bool.isRequired,
-//     price: PropTypes.number.isRequired,
-//     features: PropTypes.arrayOf(PropTypes.string).isRequired,
-//     gallery: PropTypes.arrayOf(PropTypes.string).isRequired,
-//     description: PropTypes.string.isRequired,
-//     checkInDate: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])]),
-//     checkOutDate: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])]),
-//     guest: PropTypes.string,
-//   }).isRequired,
-// };
-
-const roomPropTypes = {
-    id: PropTypes.string.isRequired,
-    number: PropTypes.number.isRequired,
-    type: PropTypes.oneOf(Object.values(ROOMS_TYPES)).isRequired,
-    occupancy: PropTypes.oneOf(ROOM_OCCUPANCY_LIST).isRequired,
-    isCheckedIn: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    features: PropTypes.arrayOf(PropTypes.string).isRequired,
-    gallery: PropTypes.arrayOf(PropTypes.string).isRequired,
-    description: PropTypes.string.isRequired,
-    checkInDate: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])]),
-    checkOutDate: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])]),
-    guest: PropTypes.string,
- 
-};
-
-const propTypes = {
-  room: PropTypes.shape(roomPropTypes).isRequired,
-};
 
 const CheckOutButton = ({ room }) => {
   const dispatch = useDispatch();
@@ -81,6 +45,5 @@ const CheckOutButton = ({ room }) => {
   );
 };
 
-CheckOutButton.propTypes = propTypes;
 
 export default CheckOutButton;

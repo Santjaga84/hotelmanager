@@ -7,17 +7,28 @@ export default function roomsReducer(state = initialState,{type, payload}){
   switch(type){
     
     case ACTION_TYPES.GET_ROOMS_SUCCESS:
-    return [ ...state, ...payload ];
+            
+        if(payload === null){
+          return [...state,...payload]         
+        }else{
+          return payload
+        }
+      
+    
     case ACTION_TYPES.UPDATE_ROOM_SUCCESS:
-    return [
-      ...state,
-      {
-      [payload.id]: {
-        ...state[payload.id],
-        ...payload.data,
-       }
-      },
-    ];
+    {
+      const newStateUpdate = []
+      state.forEach((item) => {
+        if(payload.id === item.id){
+          newStateUpdate.push({...item,...payload.data})
+        }else{
+          newStateUpdate.push(item)
+        }
+      })
+      
+      return newStateUpdate;
+  }
+
   case ACTION_TYPES.LOGOUT:
     return initialState;
   default:

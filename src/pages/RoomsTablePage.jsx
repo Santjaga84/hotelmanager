@@ -9,13 +9,13 @@ import { getRooms } from '../store/actions/roomsActions';
 
 
 const RoomsTablePage = () => {
-   const rooms = useSelector(getRoomsState) || [];
+   const rooms = useSelector(getRoomsState);
    const dispatch = useDispatch();
 
     useEffect(() => {
-     if (!rooms.length) {
+     
        dispatch(getRooms());
-     }
+     
    }, []);
 
    

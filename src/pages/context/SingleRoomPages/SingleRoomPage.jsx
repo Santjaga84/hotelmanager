@@ -24,7 +24,7 @@ const [currentRoom, setCurrentRoom] = useState({})
   
 const {roomId} = useParams(); 
 
-console.log("room",roomId);
+
 
 useEffect(() => {
  dispatch(getRooms());
@@ -43,15 +43,12 @@ rooms.forEach(room => {
 },[rooms]);
 
 
-console.log("price",currentRoom.features);
-console.log("currentRoom: ",typeof(currentRoom));
-console.log("rooms",rooms);
-const arr = [];
+
+const featuresArray = [];
 for (let key in currentRoom.features) {
-  arr.push(currentRoom.features[key]);
+  featuresArray.push(currentRoom.features[key]);
 }
 
-console.log("price2",arr);
 
 return (
     
@@ -76,10 +73,23 @@ return (
               <Typography.Title level={2} underline>{`Room ${currentRoom.number}`}</Typography.Title>
             </Col>
             <Col>
-              {/* <Button type="primary" className="room-button" disabled={currentRoom.isCheckedIn}>Check In</Button> */}
-                  <CheckInButton room={currentRoom} /> 
-                 <CheckOutButton room={currentRoom} />   
-              {/* <Button type="primary" className="room-button" disabled={!currentRoom.isCheckedIn}>Check Out</Button> */}
+          
+                  <CheckInButton room={
+                    {
+                     id:roomId,
+                     isCheckedIn:currentRoom.isCheckedIn,
+                     guest:currentRoom.guest,
+                    
+                  }} /> 
+                 <CheckOutButton room={
+                  {
+                    id:roomId,
+                    guest:currentRoom.guest,
+                    isCheckedIn:currentRoom.isCheckedIn,
+                   
+                  }
+                 } />   
+     
             </Col>
           </Row>
           <Row>
@@ -103,7 +113,7 @@ return (
                 
                   <List
                     size="small"
-                    dataSource={arr}
+                    dataSource={featuresArray}
                     renderItem={(item) => (
                       <List.Item>
                         <CheckOutlined />

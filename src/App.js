@@ -17,7 +17,7 @@ import { getAccounts } from './store/actions/usersActions';
 
 function App() {
 
-   const dispatch = useDispatch();
+//    const dispatch = useDispatch();
  
 //   useEffect(() => {
 //     dispatch(getRooms());
@@ -25,11 +25,11 @@ function App() {
 
 //  const roomsData = useSelector(store => store.rooms);   console.log('roomsData:',roomsData);
 
- useEffect(() => {
-    dispatch(getAccounts());
-  },[]);
+//  useEffect(() => {
+//     dispatch(getAccounts());
+//   },[]);
 
- const userData = useSelector(store => store.users.accounts);   console.log('useerData',userData);
+//  const userData = useSelector(store => store.users.accounts);   console.log('useerData',userData);
 
   return (
     <AuthContextProvider>

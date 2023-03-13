@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
-import { setDoc,doc, collection, updateDoc } from "firebase/firestore";
+import { setDoc,doc, collection, updateDoc, getDocs } from "firebase/firestore";
 
 
 const firebaseConfig = {
@@ -23,10 +23,19 @@ export const auth = getAuth(app);
 export default app;
 
 
-// export const updateRoomFirestore = async (id) => {
-//    await updateDoc(doc(db, 'rooms', id))
-// }
 
+//Для получения данных
+export const getRoomsFirebase = async () => {
+  const dbRooms = await getDocs(collection(db, "rooms"));
+
+ let roomsArr = []
+ dbRooms.forEach((doc) => {
+    roomsArr.push({...doc.data(), id: doc.id})
+    });
+    return roomsArr;
+};
+
+//Для изменения данных
 export const updateRoomFirestore = async (id, data) => {
   try {
     const roomRef = 
@@ -40,12 +49,18 @@ export const updateRoomFirestore = async (id, data) => {
 };
 
 
-// export const getRoomsFirebase = async () => {
-//   const dbRooms = await getDocs(collection(db, "rooms"));
-
-//  let roomsArr = []
-//  dbRooms.forEach((doc) => {
-//     roomsArr.push({...doc.data(), id: doc.id})
-//     });
-//     return roomsArr;
+//Для добавления данных
+// export const addRoomFirestore = async (data) => {
+//   try {
+//     const roomRef = await addDoc(collection(db, "rooms"), data);
+//     console.log('Data has been successfully added with ID: ', roomRef.id);
+//     // выполнение других действий после успешного добавления данных
+//     // ...
+//   } catch (error) {
+//     console.error('Failed to add data:', error);
+//     // использование своих собственных сообщений об ошибках или дополнительной обработки ошибки
+//     // ...
+//     throw error;
+//   }
 // };
+
