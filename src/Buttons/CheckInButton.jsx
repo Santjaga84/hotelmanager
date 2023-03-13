@@ -1,17 +1,12 @@
 import React, { useState } from 'react';
 import { Button, DatePicker, Form, Input, Modal } from 'antd';
-import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import { UserOutlined } from '@ant-design/icons';
 import { checkInRoom } from './../store/actions/roomsActions';
-import { ROOM_OCCUPANCY_LIST, ROOMS_TYPES } from './../constants/rooms';
 import { showNotification } from './../store/actions/notificationsActions';
 import { NOTIFICATION_MESSAGE, NOTIFICATION_STATUS } from './../constants/notifications';
-import  currentRoom  from './../pages/context/SingleRoomPages/SingleRoomPage';
-import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
+
 
 
 const CheckInButton = ({ room }) => {
@@ -89,6 +84,5 @@ const CheckInButton = ({ room }) => {
   );
 };
 
-// CheckInButton.propTypes = propTypes;
 
 export default CheckInButton;

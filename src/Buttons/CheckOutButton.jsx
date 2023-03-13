@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'antd';
-import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { checkOutRoom } from './../store/actions/roomsActions';
-import { ROOM_OCCUPANCY_LIST, ROOMS_TYPES } from './../constants/rooms';
+
 
 
 const CheckOutButton = ({ room }) => {
