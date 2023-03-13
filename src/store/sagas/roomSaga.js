@@ -1,5 +1,5 @@
 import {put, takeEvery, call} from 'redux-saga/effects';
-import {db, updateRoomFirestore} from '../../firebase/firebase';
+import {db, updateRoomFirestore, getRoomsFirebase} from '../../firebase/firebase';
 import { collection, getDocs, doc, updateDoc  } from "firebase/firestore";
 import { showNotification } from '../actions/notificationsActions';
 import { NOTIFICATION_MESSAGE, NOTIFICATION_STATUS } from './../../constants/notifications';
@@ -8,39 +8,35 @@ import ACTION_TYPES from './../../constants/actionTypes';
 import moment from 'moment';
 
 
+//функция генератор непосредственн в которой происходит чтение данных с firebase firestore
+// function* getRooms(){
+
+// try{
+//    const querySnapshot = yield (getDocs(collection(db, "rooms")));
+//  let rooms = []
+//  querySnapshot.forEach((doc) => {
+//     rooms.push({...doc.data(), id: doc.id})
+//     });
+//     console.log("aga",rooms);
+//     yield put(getRoomsSuccess(rooms));
+//    }catch(err){
+// yield put(showNotification(NOTIFICATION_STATUS.ERROR, NOTIFICATION_MESSAGE.GET_ROOMS_ERROR));
+//    }
+// }
+
+
+//функция генератор которая импортирует метод который получает коллекцию из firebase firestore
 function* getRooms(){
 
-try{
-   const querySnapshot = yield (getDocs(collection(db, "rooms")));
- let rooms = []
- querySnapshot.forEach((doc) => {
-    rooms.push({...doc.data(), id: doc.id})
-    });
-    console.log("aga",rooms);
+  try {
+    const rooms = yield call(getRoomsFirebase);
     yield put(getRoomsSuccess(rooms));
-   }catch(err){
-yield put(showNotification(NOTIFICATION_STATUS.ERROR, NOTIFICATION_MESSAGE.GET_ROOMS_ERROR));
-   }
+  } catch (err) {
+    yield put(showNotification(NOTIFICATION_STATUS.ERROR, NOTIFICATION_MESSAGE.GET_ROOMS_ERROR));
+  }
 }
 
-// function* updateRoom(id, updatedFields) {
-//    const roomsRef = db.child('rooms');
-//   try {
-//    const updateRoomFirebase = (id, data) => {
-//   roomsRef
-//     .orderByChild('id')
-//     .equalTo(id)
-//     .on('child_added', async (snapshot) => {
-//       await snapshot.ref.update(data);
-//     });
-// };
-//      yield call(updateRoomFirebase, id, updatedFields);
-//     yield put(updateRoomSuccess(id, updatedFields));
-//     yield put(showNotification(NOTIFICATION_STATUS.SUCCESS, NOTIFICATION_MESSAGE.UPDATE_ROOM_SUCCESS));
-//   } catch (err) {
-//     yield put(showNotification(NOTIFICATION_STATUS.ERROR, NOTIFICATION_MESSAGE.UPDATE_ROOM_ERROR));
-//   }
-// }
+
 
 function* updateRoom(id, updatedFields) {
   try {

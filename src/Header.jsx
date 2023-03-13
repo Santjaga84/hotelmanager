@@ -25,7 +25,7 @@ const Header = () => {
   
 <div className="app-card">
 <div className="card-header">
-<img className="card-icon" src="../public/images/FE-2-design_favicon.png" alt="" ></img>
+<img className="card-icon" src="/images/FE-2-design_favicon.png" alt="" ></img>
 
 </div>
     <div className="card-group" >
